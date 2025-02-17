@@ -17,7 +17,7 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7093/api/Category");
+            var responseMessage = await client.GetAsync("http://localhost:7093/api/Category");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -39,7 +39,7 @@ namespace SignalRWebUI.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createCategoryDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7093/api/Category", stringContent);
+            var responseMessage = await client.PostAsync("http://localhost:7093/api/Category", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -49,7 +49,7 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7093/api/Category/{id}");
+            var responseMessage = await client.DeleteAsync($"http://localhost:7093/api/Category/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -59,7 +59,7 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> UpdateCategory(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7093/api/Category/{id}");
+            var responseMessage = await client.GetAsync($"http://localhost:7093/api/Category/{id}");
             if (responseMessage.IsSuccessStatusCode) {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<UpdateCategoryDto>(jsonData);
@@ -73,7 +73,7 @@ namespace SignalRWebUI.Controllers
             var client= _httpClientFactory.CreateClient();
             var jsonData=JsonConvert.SerializeObject(updateCategoryDto);
             StringContent stringContent=new StringContent(jsonData,Encoding.UTF8,"application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7093/api/Category/", stringContent);
+            var responseMessage = await client.PutAsync("http://localhost:7093/api/Category/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

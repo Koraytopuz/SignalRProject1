@@ -17,7 +17,7 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7093/api/Discount");
+            var responseMessage = await client.GetAsync("http://localhost:7093/api/Discount");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -38,7 +38,7 @@ namespace SignalRWebUI.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createDiscountDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7093/api/Discount", stringContent);
+            var responseMessage = await client.PostAsync("http://localhost:7093/api/Discount", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -48,7 +48,7 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> DeleteDiscount(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:7093/api/Discount/{id}");
+            var responseMessage = await client.DeleteAsync($"http://localhost:7093/api/Discount/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
@@ -58,7 +58,7 @@ namespace SignalRWebUI.Controllers
         public async Task<IActionResult> UpdateDiscount(int id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7093/api/Discount/{id}");
+            var responseMessage = await client.GetAsync($"http://localhost:7093/api/Discount/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -73,7 +73,7 @@ namespace SignalRWebUI.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateDiscountDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7093/api/Discount/", stringContent);
+            var responseMessage = await client.PutAsync("http://localhost:7093/api/Discount/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");

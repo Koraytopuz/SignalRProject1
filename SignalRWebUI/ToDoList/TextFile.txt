@@ -1,0 +1,24 @@
+﻿-CategoryCount 
+-ProductCount
+-Aktif kategori sayısı
+-Pasif kategori sayısı
+-kategori adına göre ürün sayısı1
+-kategori adına göre ürün sayısı2
+
+-Ortalama fiyat 
+-en yüksek ürünlü 
+-en düşük ürünlü
+-ortalama hamburger fiyatı
+
+-Toplam sipariş sayısı
+-aktif sipariş sayısı
+-son sipariş tutarı
+-kasaddaki tutar 
+-bugünkü kazanç
+-Masa sayısı 
+
+
+
+
+-bölüm 10 67 68 69 70 izle 
+--- 75. bölümde 4.26dk dan itibaren update ssql sorgusunu yaz
