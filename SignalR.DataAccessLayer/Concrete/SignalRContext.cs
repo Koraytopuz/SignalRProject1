@@ -12,8 +12,8 @@ namespace SignalR.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server=PC003BTX50\\SQLEXPRESS;Database=SignalRDb;integrated Security=True;TrustServerCertificate=True;");
-            optionsBuilder.UseSqlServer("Server=PC003BTX50\\SQLEXPRESS;Database=KorayProje1; integrated Security=True; TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=PC003BTX50\\SQLEXPRESS;Database=KorayProje1;integrated Security=True;TrustServerCertificate=True;");
+            //optionsBuilder.UseSqlServer("Server=PC003BTX50\\SQLEXPRESS;Database=KorayProje1; User=sa; Password=123456;TrustServerCertificate=True;");
         }
         public DbSet<About> Abouts{ get; set; }
         public DbSet<Booking> Bookings{ get; set; }
@@ -28,5 +28,6 @@ namespace SignalR.DataAccessLayer.Concrete
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<MoneyCase> MoneyCases { get; set; }
         public DbSet<MenuTable> MenuTables { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
     }
 }
