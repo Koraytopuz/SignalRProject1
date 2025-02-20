@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SignalR.DataAccessLayer.Concrete;
+using SignalRApi.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
