@@ -27,7 +27,7 @@ namespace SignalRApi.Controllers
         //public IActionResult BasketListByMenuTableWithProductName(int id)
         //{
         //    using var context = new SignalRContext();
-        //    //var values = context.Baskets.Include(x => x.Product).Where(y => y.MenuTableID == id).Select(z => new ResultBasketListWithProducts
+        //    var values = context.Baskets.Include(x => x.Product).Where(y => y.MenuTableID == id).Select(z => new ResultBasketListWithProducts
         //    {
         //        BasketID = z.BasketID,
         //        Count = z.Count,
