@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SignalR.DtoLayer.SliderDto;
+using SignalRWebUI.Dtos.SliderDtos;
 
 namespace SignalRWebUI.ViewComponents.DefaultComponents
 {
@@ -12,7 +12,7 @@ namespace SignalRWebUI.ViewComponents.DefaultComponents
         {
             _httpClientFactory = httpClientFactory;
         }
-        public async Task<IViewComponentResult> Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:7093/api/Sliders");
