@@ -4,7 +4,7 @@ namespace SignalRWebUI.ViewComponents.DefaultComponents
 {
     public class _DefaultBookATableComponentPartial :ViewComponent
     {
-        public IViewComponentResult InvokeAync()
+        public IViewComponentResult Invoke()
         {
             return View();
         }
