@@ -54,7 +54,7 @@ namespace SignalRApi.Controllers
                 Mail = updateBookingDto.Mail,
                 Phone = updateBookingDto.Phone,
                 PersonCount = updateBookingDto.PersonCount,
-                BookingId = updateBookingDto.BookingId
+                BookingId = updateBookingDto.BookingID
             };
             _bookingService.TUpdate(booking);
             return Ok("Rezervasyon Güncellendi");
