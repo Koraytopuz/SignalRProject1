@@ -8,17 +8,14 @@ namespace SignalRWebUI.Controllers
     public class ContactController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
         public ContactController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:7093/api/Contact");
-
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -33,7 +30,7 @@ namespace SignalRWebUI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateCategory(CreateContactDto createContactDto)
+        public async Task<IActionResult> CreateContact(CreateContactDto createContactDto)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createContactDto);
@@ -55,6 +52,7 @@ namespace SignalRWebUI.Controllers
             }
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> UpdateContact(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -79,7 +77,6 @@ namespace SignalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-
         }
     }
 }

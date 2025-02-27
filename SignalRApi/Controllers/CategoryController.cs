@@ -13,7 +13,6 @@ namespace SignalRApi.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
-
         public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
@@ -25,29 +24,31 @@ namespace SignalRApi.Controllers
             var value = _mapper.Map<List<ResultCategoryDto>>(_categoryService.TGetListAll());
             return Ok(value);
         }
+
         [HttpGet("CategoryCount")]
         public IActionResult CategoryCount()
         {
             return Ok(_categoryService.TCategoryCount());
         }
+
         [HttpGet("ActiveCategoryCount")]
         public IActionResult ActiveCategoryCount()
         {
             return Ok(_categoryService.TActiveCategoryCount());
         }
+
         [HttpGet("PassiveCategoryCount")]
         public IActionResult PassiveCategoryCount()
         {
             return Ok(_categoryService.TPassiveCategoryCount());
         }
+
         [HttpPost]
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
-            _categoryService.TAdd(new Category()
-            {
-                Name = createCategoryDto.Name,
-                Status = true
-            });
+            createCategoryDto.Status = true;
+            var value = _mapper.Map<Category>(createCategoryDto);
+            _categoryService.TAdd(value);
             return Ok("Kategori Eklendi");
         }
         [HttpDelete("{id}")]
@@ -66,14 +67,9 @@ namespace SignalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            _categoryService.TUpdate(new Category()
-            {
-                CategoryId = updateCategoryDto.CategoryId,
-                Name = updateCategoryDto.Name,
-                Status = updateCategoryDto.Status,
-            });
+            var value = _mapper.Map<Category>(updateCategoryDto);
+            _categoryService.TUpdate(value);
             return Ok("Kategori Güncellendi");
-        
-    }
+        }
     }
 }

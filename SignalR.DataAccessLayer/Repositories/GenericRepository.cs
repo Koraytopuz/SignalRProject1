@@ -11,12 +11,10 @@ namespace SignalR.DataAccessLayer.Repositories
     public class GenericRepository<T> : IGenericDal<T> where T : class
     {
         private readonly SignalRContext _context;
-
         public GenericRepository(SignalRContext context)
         {
             _context = context;
         }
-
         public void add(T entity)
         {
             _context.Add(entity);

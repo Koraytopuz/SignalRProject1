@@ -10,7 +10,6 @@ namespace SignalRWebUI.Controllers
     public class ProductController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
         public ProductController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -19,7 +18,6 @@ namespace SignalRWebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:7093/api/Product/ProductListWithCategory");
-
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -28,25 +26,25 @@ namespace SignalRWebUI.Controllers
             }
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> CreateProduct()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:7093/api/Category");
-            var jsonData= await responseMessage.Content.ReadAsStringAsync();
+            var jsonData = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
-            List<SelectListItem> values2=(from x  in values
-                                          select new SelectListItem
-                                          {
-                                              Text=x.Name,
-                                          Value=x.CategoryId.ToString()
-
-                                          }).ToList();
-            ViewBag.v=values2;  
+            List<SelectListItem> values2 = (from x in values
+                                            select new SelectListItem
+                                            {
+                                                Text = x.CategoryName,
+                                                Value = x.CategoryID.ToString()
+                                            }).ToList();
+            ViewBag.v = values2;
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(CreateProductDto  createProductDto)
+        public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
         {
             createProductDto.ProductStatus = true;
             var client = _httpClientFactory.CreateClient();
@@ -69,21 +67,24 @@ namespace SignalRWebUI.Controllers
             }
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> UpdateProduct(int id)
         {
-			var client1 = _httpClientFactory.CreateClient();
-			var responseMessage1 = await client1.GetAsync("http://localhost:7093/api/Category");
-			var jsonData1 = await responseMessage1.Content.ReadAsStringAsync();
-			var values1 = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData1);
-			List<SelectListItem> values2 = (from x in values1
-											select new SelectListItem
-											{
-												Text = x.Name,
-												Value = x.CategoryId.ToString()
 
-											}).ToList();
-			ViewBag.v = values2;
-			var client = _httpClientFactory.CreateClient();
+            var client1 = _httpClientFactory.CreateClient();
+            var responseMessage1 = await client1.GetAsync("http://localhost:7093/api/Category");
+            var jsonData1 = await responseMessage1.Content.ReadAsStringAsync();
+            var values1 = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData1);
+            List<SelectListItem> values2 = (from x in values1
+                                            select new SelectListItem
+                                            {
+                                                Text = x.CategoryName,
+                                                Value = x.CategoryID.ToString()
+                                            }).ToList();
+            ViewBag.v = values2;
+
+
+            var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"http://localhost:7093/api/Product/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -94,8 +95,9 @@ namespace SignalRWebUI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateProduct( UpdateProductDto updateProductDto)
+        public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
         {
+            updateProductDto.ProductStatus = true;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateProductDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -105,7 +107,7 @@ namespace SignalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-
         }
+
     }
-    }
+}

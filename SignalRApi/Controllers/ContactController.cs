@@ -18,6 +18,7 @@ namespace SignalRApi.Controllers
             _contactService = contactService;
             _mapper = mapper;
         }
+
         [HttpGet]
         public IActionResult ContactList()
         {
@@ -27,13 +28,8 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateContact(CreateContactDto createContactDto)
         {
-            _contactService.TAdd(new Contact()
-            {
-             FooterDescription=createContactDto.FooterDescription,
-             Location=createContactDto.Location,
-             Mail= createContactDto.Mail,
-             Phone= createContactDto.Phone,
-            });
+            var value = _mapper.Map<Contact>(createContactDto);
+            _contactService.TAdd(value);
             return Ok("İletişim Bilgisi Eklendi");
         }
         [HttpDelete("{id}")]
@@ -47,19 +43,13 @@ namespace SignalRApi.Controllers
         public IActionResult GetContact(int id)
         {
             var value = _contactService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetContactDto>(value));
         }
         [HttpPut]
         public IActionResult UpdateContact(UpdateContactDto updateContactDto)
         {
-            _contactService.TUpdate(new Contact()
-            {
-                ContactId = updateContactDto.ContactId,
-                Phone = updateContactDto.Phone,
-                Mail = updateContactDto.Mail,
-                FooterDescription = updateContactDto.FooterDescription,
-                Location=updateContactDto.Location,
-            });
+            var value = _mapper.Map<Contact>(updateContactDto);
+            _contactService.TUpdate(value);
             return Ok("İletişim Bilgisi Güncellendi");
         }
     }

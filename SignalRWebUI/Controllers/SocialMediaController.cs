@@ -5,20 +5,18 @@ using System.Text;
 
 namespace SignalRWebUI.Controllers
 {
+
     public class SocialMediaController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
         public SocialMediaController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:7093/api/SocialMedia");
-
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -55,6 +53,7 @@ namespace SignalRWebUI.Controllers
             }
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> UpdateSocialMedia(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -79,7 +78,6 @@ namespace SignalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-
         }
     }
 }

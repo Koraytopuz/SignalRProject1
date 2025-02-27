@@ -8,17 +8,14 @@ namespace SignalRWebUI.Controllers
     public class DiscountController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
         public DiscountController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:7093/api/Discount");
-
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -55,6 +52,7 @@ namespace SignalRWebUI.Controllers
             }
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> UpdateDiscount(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -79,7 +77,20 @@ namespace SignalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
 
+        public async Task<IActionResult> ChangeStatusToTrue(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"http://localhost:7093/api/Discount/ChangeStatusToTrue/{id}");
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> ChangeStatusToFalse(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"http://localhost:7093/api/Discount/ChangeStatusToFalse/{id}");
+            return RedirectToAction("Index");
         }
     }
 }

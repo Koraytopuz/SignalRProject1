@@ -35,8 +35,8 @@ namespace SignalRWebUI.Controllers
                 return BadRequest("MenuTableId 0 geliyor.");
             }
 
-           CreateBasketDto createBasketDto = new CreateBasketDto
-           {
+            CreateBasketDto createBasketDto = new CreateBasketDto
+            {
                 ProductID = id,
                 MenuTableID = menuTableId // Gelen MenuTableID burada kullanılıyor
             };

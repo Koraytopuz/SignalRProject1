@@ -5,20 +5,18 @@ using System.Text;
 
 namespace SignalRWebUI.Controllers
 {
+
     public class CategoryController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
         public CategoryController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:7093/api/Category");
-
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -56,11 +54,13 @@ namespace SignalRWebUI.Controllers
             }
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> UpdateCategory(int id)
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"http://localhost:7093/api/Category/{id}");
-            if (responseMessage.IsSuccessStatusCode) {
+            if (responseMessage.IsSuccessStatusCode)
+            {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<UpdateCategoryDto>(jsonData);
                 return View(values);
@@ -68,18 +68,17 @@ namespace SignalRWebUI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateCategory( UpdateCategoryDto updateCategoryDto)
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            var client= _httpClientFactory.CreateClient();
-            var jsonData=JsonConvert.SerializeObject(updateCategoryDto);
-            StringContent stringContent=new StringContent(jsonData,Encoding.UTF8,"application/json");
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(updateCategoryDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
             var responseMessage = await client.PutAsync("http://localhost:7093/api/Category/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
             }
             return View();
-            
         }
     }
 }

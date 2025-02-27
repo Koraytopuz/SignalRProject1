@@ -8,17 +8,14 @@ namespace SignalRWebUI.Controllers
     public class TestimonialController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
         public TestimonialController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:7093/api/Testimonial");
-
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -35,7 +32,6 @@ namespace SignalRWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTestimonial(CreateTestimonialDto createTestimonialDto)
         {
-            createTestimonialDto.Status = true;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createTestimonialDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -56,6 +52,7 @@ namespace SignalRWebUI.Controllers
             }
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> UpdateTestimonial(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -80,7 +77,6 @@ namespace SignalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-
         }
     }
 }

@@ -22,15 +22,15 @@ namespace SignalR.BusinessLayer.Concrete
             _menuTableDal.add(entity);
         }
 
-        //public void TChangeMenuTableStatusToFalse(int id)
-        //{
-        //    _menuTableDal.ChangeMenuTableStatusToFalse(id);
-        //}
+        public void TChangeMenuTableStatusToFalse(int id)
+        {
+            _menuTableDal.ChangeMenuTableStatusToFalse(id);
+        }
 
-        //public void TChangeMenuTableStatusToTrue(int id)
-        //{
-        //    _menuTableDal.ChangeMenuTableStatusToTrue(id);
-        //}
+        public void TChangeMenuTableStatusToTrue(int id)
+        {
+            _menuTableDal.ChangeMenuTableStatusToTrue(id);
+        }
 
         public void TDelete(MenuTable entity)
         {

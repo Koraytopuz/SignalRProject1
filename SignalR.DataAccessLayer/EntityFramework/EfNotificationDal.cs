@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.DataAccessLayer.EntityFramework
 {
-   public class EfNotificationDal : GenericRepository<Notification>, INotificationDal
+    public class EfNotificationDal : GenericRepository<Notification>, INotificationDal
     {
         public EfNotificationDal(SignalRContext context) : base(context)
         {

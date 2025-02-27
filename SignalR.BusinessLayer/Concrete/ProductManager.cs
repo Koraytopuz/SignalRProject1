@@ -18,14 +18,14 @@ namespace SignalR.BusinessLayer.Concrete
             _productDal = productDal;
         }
 
-        public string TProcutNamePriceByMaxPrice()
+        public string TProductNameByMaxPrice()
         {
-           return _productDal.ProcutNamePriceByMaxPrice();
+            return _productDal.ProductNameByMaxPrice();
         }
 
-        public string TProcutNamePriceByMinPrice()
+        public string TProductNameByMinPrice()
         {
-            return _productDal.ProcutNamePriceByMinPrice();
+            return _productDal.ProductNameByMinPrice();
         }
 
         public void TAdd(Product entity)
@@ -70,7 +70,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public decimal TProductPriceAvg()
         {
-           return _productDal.ProductPriceAvg();
+            return _productDal.ProductPriceAvg();
         }
 
         public void TUpdate(Product entity)
@@ -80,7 +80,28 @@ namespace SignalR.BusinessLayer.Concrete
 
         public decimal TProductAvgPriceByHamburger()
         {
-           return _productDal.ProductAvgPriceByHamburger();    
+            return _productDal.ProductAvgPriceByHamburger();
+        }
+
+        public decimal TProductPriceBySteakBurger()
+        {
+            return _productDal.ProductPriceBySteakBurger();
+        }
+
+        public decimal TTotalPriceByDrinkCategory()
+        {
+            return _productDal.TotalPriceByDrinkCategory();
+        }
+
+        public decimal TTotalPriceBySaladCategory()
+        {
+            return _productDal.TotalPriceBySaladCategory();
+        }
+
+        public List<Product> TGetLast9Products()
+        {
+            return _productDal.GetLast9Products();
         }
     }
 }
+

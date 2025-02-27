@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.EntityLayer.Entities;
 using SignalRWebUI.Dtos.IdentityDtos;
@@ -29,7 +30,7 @@ namespace SignalRWebUI.Controllers
                 Email = registerDto.Mail,
                 UserName = registerDto.Username
             };
-            var result = await _userManager.CreateAsync(appUser,registerDto.Password);
+            var result = await _userManager.CreateAsync(appUser, registerDto.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Login");

@@ -12,12 +12,10 @@ namespace SignalR.BusinessLayer.Concrete
     public class ContactManager : IContactService
     {
         private readonly IContactDal _contactDal;
-
         public ContactManager(IContactDal contactDal)
         {
             _contactDal = contactDal;
         }
-
         public void TAdd(Contact entity)
         {
             _contactDal.add(entity);
@@ -40,7 +38,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public void TUpdate(Contact entity)
         {
-            _contactDal.update(entity); 
+            _contactDal.update(entity);
         }
     }
 }

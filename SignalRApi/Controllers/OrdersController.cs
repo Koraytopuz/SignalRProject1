@@ -14,16 +14,19 @@ namespace SignalRApi.Controllers
         {
             _orderService = orderService;
         }
+
         [HttpGet("TotalOrderCount")]
         public IActionResult TotalOrderCount()
         {
             return Ok(_orderService.TTotalOrderCount());
         }
+
         [HttpGet("ActiveOrderCount")]
         public IActionResult ActiveOrderCount()
         {
             return Ok(_orderService.TActiveOrderCount());
         }
+
         [HttpGet("LastOrderPrice")]
         public IActionResult LastOrderPrice()
         {

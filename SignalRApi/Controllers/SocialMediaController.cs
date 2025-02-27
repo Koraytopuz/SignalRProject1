@@ -13,12 +13,12 @@ namespace SignalRApi.Controllers
     {
         private readonly ISocialMediaService _socialMediaService;
         private readonly IMapper _mapper;
-
         public SocialMediaController(ISocialMediaService socialMediaService, IMapper mapper)
         {
             _socialMediaService = socialMediaService;
             _mapper = mapper;
         }
+
         [HttpGet]
         public IActionResult SocialMediaList()
         {
@@ -28,13 +28,9 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateSocialMedia(CreateSocialMediaDto createSocialMediaDto)
         {
-            _socialMediaService.TAdd(new SocialMedia()
-            {
-                Icon=createSocialMediaDto.Icon,
-                Title=createSocialMediaDto.Title,
-                Url=createSocialMediaDto.Url,
-            });
-            return Ok("Sosyal Medya  Bilgisi Eklendi");
+            var value = _mapper.Map<SocialMedia>(createSocialMediaDto);
+            _socialMediaService.TAdd(value);
+            return Ok("Sosyal Medya Bilgisi Eklendi");
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteSocialMedia(int id)
@@ -47,18 +43,13 @@ namespace SignalRApi.Controllers
         public IActionResult GetSocialMedia(int id)
         {
             var value = _socialMediaService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetSocialMediaDto>(value));
         }
         [HttpPut]
         public IActionResult UpdateSocialMedia(UpdateSocialMediaDto updateSocialMediaDto)
         {
-            _socialMediaService.TUpdate(new SocialMedia()
-            {
-                Url=updateSocialMediaDto.Url,
-                Title=updateSocialMediaDto.Title,
-                Icon=updateSocialMediaDto.Icon,
-                SocialMediaId = updateSocialMediaDto.SocialMediaId
-            });
+            var value = _mapper.Map<SocialMedia>(updateSocialMediaDto);
+            _socialMediaService.TUpdate(value);
             return Ok("Sosyal Medya Bilgisi Güncellendi");
         }
     }

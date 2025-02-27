@@ -9,6 +9,8 @@ namespace SignalR.DataAccessLayer.Abstract
 {
    public interface IMenuTableDal:IGenericDal<MenuTable>
     {
+        void ChangeMenuTableStatusToFalse(int id);
+        void ChangeMenuTableStatusToTrue(int id);
         int MenuTableCount();
     }
 }

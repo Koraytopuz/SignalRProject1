@@ -8,17 +8,14 @@ namespace SignalRWebUI.Controllers
     public class AboutController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
         public AboutController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync("http://localhost:7093/api/About");
-
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -33,7 +30,7 @@ namespace SignalRWebUI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreateCategory(CreateAboutDto createAboutDto )
+        public async Task<IActionResult> CreateAbout(CreateAboutDto createAboutDto)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createAboutDto);
@@ -55,6 +52,7 @@ namespace SignalRWebUI.Controllers
             }
             return View();
         }
+        [HttpGet]
         public async Task<IActionResult> UpdateAbout(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -68,7 +66,7 @@ namespace SignalRWebUI.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateAbout(UpdateAboutDto updateAboutDto )
+        public async Task<IActionResult> UpdateAbout(UpdateAboutDto updateAboutDto)
         {
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateAboutDto);
@@ -79,7 +77,6 @@ namespace SignalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-
         }
     }
 }

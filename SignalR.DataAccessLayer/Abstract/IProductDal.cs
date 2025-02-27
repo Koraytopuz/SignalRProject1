@@ -14,9 +14,13 @@ namespace SignalR.DataAccessLayer.Abstract
         int ProductCountByCategoryNameHamburger();
         int ProductCountByCategoryNameDrink();
         decimal ProductPriceAvg();
-        string ProcutNamePriceByMaxPrice();
-        string ProcutNamePriceByMinPrice();
+        string ProductNameByMaxPrice();
+        string ProductNameByMinPrice();
         decimal ProductAvgPriceByHamburger();
+        decimal ProductPriceBySteakBurger();
+        decimal TotalPriceByDrinkCategory();
+        decimal TotalPriceBySaladCategory();
+        List<Product> GetLast9Products();
 
     }
 }

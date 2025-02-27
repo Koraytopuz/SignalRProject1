@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.DataAccessLayer.EntityFramework
 {
-      public class EfMoneyCaseDal : GenericRepository<MoneyCase>, IMoneyCaseDal
+    public class EfMoneyCaseDal : GenericRepository<MoneyCase>, IMoneyCaseDal
     {
         public EfMoneyCaseDal(SignalRContext context) : base(context)
         {
@@ -22,6 +22,5 @@ namespace SignalR.DataAccessLayer.EntityFramework
             return context.MoneyCases.Select(x => x.TotalAmount).FirstOrDefault();
         }
     }
-    
     }
 
